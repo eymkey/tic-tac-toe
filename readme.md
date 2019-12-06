@@ -1,13 +1,13 @@
-##GIT Convention
+## GIT Convention
 
-###Code Of Conduct
+### Code Of Conduct
 
 1. Do not use commands you do not understand or are not used to
 2. Always as for help before doing strange things
 
-###Allowed
+### Allowed
 
-####Actions
+#### Actions
 
 |command |arguments |description |comment |
 |-----------|---------------|-----------------------------------|-------------------------------|
@@ -17,7 +17,7 @@
 | fetch | | fetches branches and refs |
 | merge | branch | updates HEAD to the latest commit | only fastforward merges |
 
-####Display Information
+#### Display Information
 
 |command |arguments |description |comment |
 |-----------|-------------------|---------------------------------------|-----------|
@@ -27,7 +27,7 @@
 | branch | -a | shows all local and remote branches | 
 | remote | -v | shows all remote connections |
 
-###Review Required
+### Review Required
 
 |command |arguments |description |comment |
 |-----------|-----------------------|---------------------------------------|-------------------------------|
@@ -35,9 +35,9 @@
 | merge | branch | merges two branches to a single commit | all non fastforward merges |
 | push | [-u] remote branch | pushes local commits to the server |
 
-##Workflow
+## Workflow
 
-###Starting Your Work
+### Starting Your Work
 
 |command |description |
 |-------|----------|
@@ -45,7 +45,7 @@
 | git log --all --graph | check if everything is ok |
 | git merge | only fastforward merges, look at the commit history |
 
-###Commits
+### Commits
 
 Try to create as little as possible commits. Only commit if a logical task ist completed. Seperate your commit message into header - blank line - body. Use the imperativ in the header (add, update, change, etc.) Always check your branch before commiting.
 
@@ -56,7 +56,7 @@ First line of the body.
 Second line of the body.
 ```
 
-###Three Way Merging
+### Three Way Merging
 
 1. checkout to master
 2. look at the commit history if everything is as expected
@@ -64,6 +64,6 @@ Second line of the body.
 4. resolve merge conflicts
 5. git commit
 
-###Pushing
+### Pushing
 
 Pushing must always be approved by a second person. Do not push unless you have a fully understanding of all effects.
