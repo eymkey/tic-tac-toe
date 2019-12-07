@@ -2,12 +2,14 @@ import numpy as np
 from player import RandomPlayer
 from ui import UI
 import time
-
+import random
 
 class Game():
-    def __init__(self, player1, player2, rounds, ui):
+    def __init__(self, player1, player2, rounds, ui=None, log=False):
         self.rounds = rounds
         self.statistics = np.zeros(3, dtype=np.int64)
+        self.ui = ui
+        self.log = log
 
         self.player1 = player1
         self.player2 = player2
@@ -16,7 +18,7 @@ class Game():
 
     def reset(self):
         self.state = np.zeros((3,3), dtype=np.int32)
-        self.turn = 1
+        self.turn = random.randrange(1,3)
 
     def move(self):
         if self.turn == 1:
@@ -52,14 +54,14 @@ class Game():
         for winning_situation in winning_situations:
             pos1, pos2, pos3 = winning_situation
             if current_state[pos1] == current_state[pos2] == current_state[pos3] and current_state[pos1] != 0:
-                return (False, current_state[pos1])
+                return False, current_state[pos1]
 
         # check for a tie
         empty_fields = np.sum([1 if position == 0 else 0 for position in current_state])
         if empty_fields == 0:
-            return (False, 0)
+            return False, 0
 
-        return (True, None)
+        return True, None
 
     def start(self):
         for _ in range(1,self.rounds+1):
@@ -70,11 +72,12 @@ class Game():
 
             while running:
                 self.move()
-                ui.render(self)
+                if self.ui is not None:
+                    self.ui.render(self)
+                    time.sleep(0.05)
                 running, winner = self.is_game_running()
-                time.sleep(0.5)
 
-            print(f"Player {winner} Wins")
+            if self.log: print(f"Player {winner} Wins")
             self.statistics[winner] += 1
 
         return self.statistics
@@ -83,6 +86,6 @@ class Game():
 ui = UI()
 randomPlayer1 = RandomPlayer()
 randomPlayer2 = RandomPlayer()
-game1 = Game(randomPlayer1, randomPlayer2, 10, ui)
+game1 = Game(randomPlayer1, randomPlayer2, 20, ui=ui, log=True)
 statistics = game1.start()
 print(statistics)
